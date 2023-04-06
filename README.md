@@ -59,9 +59,10 @@ replacement_cost = (select max(replacement_cost)from film))
 ```sql
 
 
-select customer_id, count(customer_id)  from payment 
-group by customer_id
-order by count(customer_id) desc
+select sum(payment.amount), customer.first_name, customer.last_name  from customer 
+join payment on customer.customer_id = payment.customer_id 
+group by payment.customer_id, customer.first_name, customer.last_name
+order by sum(payment.amount) desc
 
 
 ```
